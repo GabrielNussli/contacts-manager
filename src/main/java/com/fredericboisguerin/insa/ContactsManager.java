@@ -1,5 +1,6 @@
 package com.fredericboisguerin.insa;
-import java.util.ArrayList;
+import java.util.*;
+
 public class ContactsManager {
     ArrayList<Contact> listContact = new ArrayList<Contact>();
     public void addContact(String name, String email, String phoneNumber) {
@@ -14,6 +15,11 @@ public class ContactsManager {
     }
 
     public void searchContactByName(String name) {
+        for (Contact contact:listContact) {
+            if(contact.name.toLowerCase().contains(name)){
+                System.out.println(contact);
+            }
 
+        }
     }
 }
