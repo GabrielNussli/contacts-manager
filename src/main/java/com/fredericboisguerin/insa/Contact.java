@@ -13,10 +13,13 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        if (email==null)
+            return
+                    name +", "+ phoneNumber ;
+        if (phoneNumber==null)
+            return name +", "+ email ;
+        else
+            return
+                name +", "+ email+", " + phoneNumber ;
     }
 }
