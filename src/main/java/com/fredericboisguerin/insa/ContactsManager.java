@@ -1,12 +1,15 @@
 package com.fredericboisguerin.insa;
-
+import java.util.ArrayList;
 public class ContactsManager {
-
+    ArrayList<Contact> listContact = new ArrayList<Contact>();
     public void addContact(String name, String email, String phoneNumber) {
-
+        listContact.add(new Contact(name,email,phoneNumber));
     }
 
     public void printAllContacts() {
+        for (Contact contact:listContact) {
+            System.out.println(contact);
+        }
 
     }
 
