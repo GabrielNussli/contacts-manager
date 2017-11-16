@@ -3,7 +3,7 @@ import java.util.*;
 
 public class ContactsManager {
     ArrayList<Contact> listContact = new ArrayList<Contact>();
-    public void addContact(String name, String email, String phoneNumber) {
+    public void addContact(String name, String email, String phoneNumber) throws InvalidContactNameException,InvalidEmailException{
         listContact.add(new Contact(name,email,phoneNumber));
     }
 
