@@ -7,22 +7,23 @@ public class Contact {
     String email;
     String phoneNumber;
 
-    public Contact(String name, String email, String phoneNumber) throws InvalidContactNameException, InvalidEmailException
-    {
-
-        if(name==null)
-            throw new InvalidContactNameException();
-        if(name=="")
-            throw new InvalidContactNameException();
+    public Contact(String name, String email, String phoneNumber) throws InvalidContactNameException, InvalidEmailException {
         this.name = name;
         this.email = email;
-        Pattern pattern ;
-        pattern = Pattern.compile("@[a-z]+\\..[a-z]+");
-        java.util.regex.Matcher matcher;
-        matcher = pattern.matcher(email);
-        if(!(matcher.find()))
-            throw new InvalidEmailException();
         this.phoneNumber = phoneNumber;
+        if (name == null)
+            throw new InvalidContactNameException();
+        if (name == "")
+            throw new InvalidContactNameException();
+        if (email != null) {
+            Pattern pattern;
+            pattern = Pattern.compile("@[a-z]+\\..[a-z]+");
+            java.util.regex.Matcher matcher;
+            matcher = pattern.matcher(email);
+
+        if (!(matcher.find()))
+            throw new InvalidEmailException();
+        }
     }
 
     @Override

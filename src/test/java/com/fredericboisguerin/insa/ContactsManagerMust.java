@@ -31,23 +31,23 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void list_one_contact_without_email_nor_phone_number() throws InvalidContactNameException,InvalidEmailException{
+    public void list_one_contact_without_email_nor_phone_number() throws InvalidContactNameException{
         ContactsManager contactsManager = new ContactsManager();
         String noEmail = null;
         String noPhoneNumber = null;
-        contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, noPhoneNumber);
-
+        try{contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, noPhoneNumber);}
+        catch( InvalidEmailException e){}
         contactsManager.printAllContacts();
 
         assertThat(standardOutput(), containsString(NICOLE_FERRONI_NAME));
     }
 
     @Test
-    public void list_one_contact_without_email() throws InvalidContactNameException,InvalidEmailException{
+    public void list_one_contact_without_email() throws InvalidContactNameException{
         ContactsManager contactsManager = new ContactsManager();
         String noEmail = null;
-        contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, NICOLE_FERRONI_PHONE_NUMBER);
-
+        try{contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, NICOLE_FERRONI_PHONE_NUMBER);}
+        catch( InvalidEmailException e){}
         contactsManager.printAllContacts();
 
         String expectedOutput = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_PHONE_NUMBER;
