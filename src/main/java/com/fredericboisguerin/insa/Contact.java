@@ -1,11 +1,15 @@
 package com.fredericboisguerin.insa;
 import java.util.*;
 import java.util.regex.Pattern;
+import com.opencsv.bean.CsvBindByName;
 
 public class Contact {
-    String name;
-    String email;
-    String phoneNumber;
+    @CsvBindByName
+    protected String name;
+    @CsvBindByName
+    protected String email;
+    @CsvBindByName
+    protected String phoneNumber;
 
     public Contact(String name, String email, String phoneNumber) throws InvalidContactNameException, InvalidEmailException {
         this.name = name;
@@ -13,7 +17,7 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         if (name == null)
             throw new InvalidContactNameException();
-        if (name == "")
+        if (name.equals(""))
             throw new InvalidContactNameException();
         if (email != null) {
             Pattern pattern;

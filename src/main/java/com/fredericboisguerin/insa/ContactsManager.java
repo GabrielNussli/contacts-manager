@@ -1,8 +1,12 @@
 package com.fredericboisguerin.insa;
+import java.io.*;
 import java.util.*;
+import com.opencsv.bean.*;
 
 public class ContactsManager {
-    ArrayList<Contact> listContact = new ArrayList<Contact>();
+    ArrayList<Contact> listContact = new ArrayList<>();
+
+
     public void addContact(String name, String email, String phoneNumber) throws InvalidContactNameException,InvalidEmailException{
         listContact.add(new Contact(name,email,phoneNumber));
     }
