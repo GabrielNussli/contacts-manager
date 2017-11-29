@@ -4,87 +4,47 @@ import java.util.*;
 
 public class InterfaceClavier {
     private static Scanner Sc = new Scanner(System.in);
-    private static ContactsManager c = new ContactsManager();
+    private static PackFactory p;
+    private static ShippingCostCalculator scc = new ShippingCostCalculator();
+
 
     public static void main(String[] args) {
+        System.out.println("Enter dimensional values in millimeters (Integer), weight in kilogrammes(Double), and the destination to get the corresponding shipping cost");
         while (true) {
+            System.out.println("Compute\nExit");
             String cmd = Sc.next();
-            if (cmd.equals("open"))
-                ouvrir_fichier(Sc.next());
-            if (cmd.equals("add")) {
-                System.out.println("add1");
-
-                String nom = Sc.next();
-                String email = Sc.next();
-                String phone = Sc.next();;
+            if (cmd.toLowerCase().equals("compute")) {
                 try {
-                    c.addContact(nom, email, phone);
-                } catch (InvalidContactNameException | InvalidEmailException f) {
-                    System.out.println(f);
-
+                    System.out.print("height : ");
+                    int height = Integer.parseInt(Sc.next());
+                    System.out.println();
+                    System.out.print("width : ");
+                    int width = Integer.parseInt(Sc.next());
+                    System.out.println();
+                    System.out.print("depth : ");
+                    int depth = Integer.parseInt(Sc.next());
+                    System.out.println();
+                    System.out.print("weight : ");
+                    double weight = Double.parseDouble(Sc.next());
+                    System.out.println();
+                    p = new PackFactory(height, width, depth, weight);
+                    System.out.println("destination : 1 -> FR  2 -> MC  3 -> DOM_TOM");
+                    int dest = Integer.parseInt(Sc.next());
+                    if (dest == 1)
+                        System.out.println("Shipping cost = " + Double.toString(scc.calculateShippingCost(p.pack, ShippingCostCalculator.Destination.FR)));
+                    else if (dest == 2)
+                        System.out.println("Shipping cost = " + Double.toString(scc.calculateShippingCost(p.pack, ShippingCostCalculator.Destination.MC)));
+                    else if (dest == 3)
+                        System.out.println("Shipping cost = " + Double.toString(scc.calculateShippingCost(p.pack, ShippingCostCalculator.Destination.DOM_TOM)));
+                    else
+                        System.out.println("Destination Unknown");
+                } catch (java.lang.NumberFormatException e) {
+                    System.out.println("Wrong type value detected -> height,width,depth : int  weight : double");
                 }
             }
-            if (cmd.matches("print")) {
-                System.out.println("print1");
-
-                c.printAllContacts();
-            }
-            if (cmd.matches("search")) {
-                String nom =Sc.next();
-                c.searchContactByName(nom);
-
-            }
-
-            if (cmd.matches("save")) {
-                sauver_contacts(Sc.next());
-            }
-
+            if (cmd.toLowerCase().equals("exit"))
+                break;
         }
     }
 
-    public static void ouvrir_fichier(String chemin){
-        String csvFile = chemin;
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
-
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-
-                // use comma as separator
-                String[] contact = line.split(cvsSplitBy);
-
-                c.addContact(contact[0],contact[1],contact[2]);
-
-            }
-        } catch(java.io.FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException | InvalidEmailException | InvalidContactNameException e) {
-            e.printStackTrace();
-        }finally{
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public static void sauver_contacts(String chemin){
-        File csvFile = new File(chemin);
-        try{
-            PrintStream l_out = new PrintStream(new FileOutputStream(chemin));
-        for (Contact contact:c.listContact) {
-            l_out.print(contact);
-            l_out.println();
-            l_out.flush();
-
-        }
-            l_out.close();
-            l_out=null;
-        } catch (java.io.FileNotFoundException e){}
-    }
 }
