@@ -31,7 +31,15 @@ public class PackTest {
 
                 {653, 133, 271, 2.132, ShippingCostCalculator.Destination.MC, "50.1"},
 
-                {653, 331, 271, 3.650, ShippingCostCalculator.Destination.MC, "91.05"}
+                {653, 331, 271, 3.650, ShippingCostCalculator.Destination.MC, "91.05"},
+
+                {191, 123, 18, 2.354, ShippingCostCalculator.Destination.DOM_TOM, "13.91"},
+
+                {253, 215, 164, 1.565, ShippingCostCalculator.Destination.DOM_TOM, "33.29"},
+
+                {653, 133, 271, 2.132, ShippingCostCalculator.Destination.DOM_TOM, "49.84"},
+
+                {653, 331, 271, 3.650, ShippingCostCalculator.Destination.DOM_TOM, "89.54"}
 
         });
     }
